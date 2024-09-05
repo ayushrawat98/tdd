@@ -18,9 +18,28 @@ export class AppComponent {
       numbers = numbers.split("\n")[1]
     }
 
+    //split the number
+    let splitnumber = numbers.split(delimiterregex)
+
+    //check negative number
+    this.checkNegativeNumber(splitnumber);
+
     //split and add
-    result = numbers.split(delimiterregex).reduce((acc, cur) => acc + (+cur), 0)
+    result = splitnumber.reduce((acc, cur) => acc + (+cur), 0)
 
     return result;
   }
+
+  checkNegativeNumber(numbers : string[]){
+    let exception = []
+    for(let num of numbers){
+      if((+num) < 0){
+        exception.push(num)
+      }
+    }
+    if(exception.length){
+      throw new Error(`negatives not allowed ${exception.join(",")}`)
+    }
+  }
+
 }

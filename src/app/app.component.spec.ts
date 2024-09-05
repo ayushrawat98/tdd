@@ -51,5 +51,9 @@ describe('AppComponent', () => {
     expect(appcomponent.add('//;\n1;2;3;5;6')).toBe(17)
   })
 
+  it('should throw error on negative number', () => {
+    expect(() => appcomponent.add('-1,2,3')).toThrowError('negatives not allowed -1')
+    expect(() => appcomponent.add('-1,2,-3')).toThrowError('negatives not allowed -1,-3')
+  })
 
 });
