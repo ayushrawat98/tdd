@@ -56,4 +56,11 @@ describe('AppComponent', () => {
     expect(() => appcomponent.add('-1,2,-3')).toThrowError('negatives not allowed -1,-3')
   })
 
+  it('should ignore numbers greater than 1000', () => {
+    expect(appcomponent.add('1001,2')).toBe(2)
+    expect(appcomponent.add('1001,2,0,100000,2')).toBe(4)
+  })
+
+  
+
 });

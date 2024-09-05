@@ -24,6 +24,9 @@ export class AppComponent {
     //check negative number
     this.checkNegativeNumber(splitnumber);
 
+    //remove number greater than 1000
+    splitnumber = splitnumber.filter(num => (+num) < 1000)
+
     //split and add
     result = splitnumber.reduce((acc, cur) => acc + (+cur), 0)
 
