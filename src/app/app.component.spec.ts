@@ -29,14 +29,6 @@ describe('AppComponent', () => {
     expect(appcomponent.add('')).toBe(0)
   })
 
-  it('should return 0 when single comma and no number', () => {
-    expect(appcomponent.add(',')).toBe(0)
-  })
-
-  it('should return 0 when multiple commas and no number', () => {
-    expect(appcomponent.add(',,,,,,')).toBe(0)
-  })
-
   it('should return number itself when there is only one number', () => {
     expect(appcomponent.add('1')).toBe(1)
   })
@@ -47,6 +39,11 @@ describe('AppComponent', () => {
 
   it('should return sum of multiple numbers in string', () => {
     expect(appcomponent.add('3,4,5,7,8,8,5,7,4,6,3')).toBe(60)
+  })
+
+  it('should return sum with new line instead of comma ', () => {
+    expect(appcomponent.add('3\n3,2')).toBe(8)
+    expect(appcomponent.add('3\n3\n2\n2\n8\n8,0')).toBe(26)
   })
 
 

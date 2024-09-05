@@ -9,7 +9,7 @@ export class AppComponent {
 
   add(numbers: string): number {
     let result = 0
-    result = numbers.split(",").reduce((acc, cur) => acc + (+cur), 0)
+    result = numbers.split(/,|\n/).reduce((acc, cur) => acc + (+cur), 0)
     return result;
   }
 }
