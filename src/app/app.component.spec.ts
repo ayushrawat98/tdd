@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  let appcomponent : AppComponent
-  let fixture : ComponentFixture<AppComponent>
+  let appcomponent: AppComponent
+  let fixture: ComponentFixture<AppComponent>
 
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AppComponent]
@@ -46,6 +46,10 @@ describe('AppComponent', () => {
     expect(appcomponent.add('3\n3\n2\n2\n8\n8,0')).toBe(26)
   })
 
+  it('should support different delimiter', () => {
+    expect(appcomponent.add('//;\n1;2')).toBe(3)
+    expect(appcomponent.add('//;\n1;2;3;5;6')).toBe(17)
+  })
 
 
 });
