@@ -9,7 +9,7 @@ export class AppComponent {
 
   add(numbers: string): number {
     let result = 0
-    let delimiterregex : RegExp | string = /,|\n/
+    let delimiterregex  = [',', '\n']
     let checkcustomdelimiterregex = /^\/\//
 
     //check if there is custom delimiter
@@ -19,7 +19,7 @@ export class AppComponent {
     }
 
     //split the number
-    let splitnumber = numbers.split(delimiterregex)
+    let splitnumber = this.splitNumbers(numbers,delimiterregex)
 
     //check negative number
     this.checkNegativeNumber(splitnumber);
@@ -45,12 +45,31 @@ export class AppComponent {
     }
   }
 
-  getCustomDelimiterRegex(numbers : string) : string{
+  getCustomDelimiterRegex(numbers : string) : string[]{
     if(numbers.charAt(2) != '['){
-      return numbers.charAt(2)
+      return [numbers.charAt(2)]
     }else{
-      return numbers.slice(3, numbers.lastIndexOf(']'))
+      let regex = /\[(.*?)\]/g;
+      let matched = []
+      let temp = regex.exec(numbers)
+      while (temp != null) {
+        matched.push(temp[1])
+        temp = regex.exec(numbers)
+      }
+      return matched
     }
+  }
+
+  splitNumbers(numbers : string, delimiterregex : string[]) : string[]{
+    let result : string[] = []
+    for(let delimiter of delimiterregex){
+      if(result.length == 0){
+        result = numbers.split(delimiter)
+      }else{
+        result = result.flatMap(num => num.split(delimiter))
+      }
+    }
+    return result
   }
 
 }

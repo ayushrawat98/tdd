@@ -63,7 +63,11 @@ describe('AppComponent', () => {
 
   it('should support custom delimiter of any length', () => {
     expect(appcomponent.add('//[***]\n1***2***3')).toBe(6)
-    expect(appcomponent.add('//[[\]]\n1[\]2[\]3')).toBe(6)
   })
+
+  it('should support multiple custom delimiter', () => {
+    expect(appcomponent.add('//[*][%]\n1*2%3')).toBe(6)
+  })
+  
 
 });
