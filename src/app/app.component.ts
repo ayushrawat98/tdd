@@ -10,11 +10,11 @@ export class AppComponent {
   add(numbers: string): number {
     let result = 0
     let delimiterregex : RegExp | string = /,|\n/
-    let customdelimiterregex = /^\/\//
+    let checkcustomdelimiterregex = /^\/\//
 
     //check if there is custom delimiter
-    if (customdelimiterregex.test(numbers)) {
-      delimiterregex = numbers.charAt(2)
+    if (checkcustomdelimiterregex.test(numbers)) {
+      delimiterregex = this.getCustomDelimiterRegex(numbers.split("\n")[0])
       numbers = numbers.split("\n")[1]
     }
 
@@ -27,7 +27,7 @@ export class AppComponent {
     //remove number greater than 1000
     splitnumber = splitnumber.filter(num => (+num) < 1000)
 
-    //split and add
+    //add
     result = splitnumber.reduce((acc, cur) => acc + (+cur), 0)
 
     return result;
@@ -42,6 +42,14 @@ export class AppComponent {
     }
     if(exception.length){
       throw new Error(`negatives not allowed ${exception.join(",")}`)
+    }
+  }
+
+  getCustomDelimiterRegex(numbers : string) : string{
+    if(numbers.charAt(2) != '['){
+      return numbers.charAt(2)
+    }else{
+      return numbers.slice(3, numbers.lastIndexOf(']'))
     }
   }
 
